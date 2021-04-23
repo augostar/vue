@@ -1,27 +1,52 @@
 <template>
-  <div id="app">
-    <HelloWorld msg="Welcome to Augo"/>
+  <div id="app" ref="app">
+    <Fullscreen @handFullscreen="handFullscreen" :text="text" />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Fullscreen from "./components/Fullscreen.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
-  }
-}
+    Fullscreen,
+  },
+  data() {
+    return {
+      text: "全屏",
+    };
+  },
+  methods: {
+    handFullscreen() {
+      let fullscreen = this.$refs.app;
+      if (!document.fullscreenElement) {
+        fullscreen.requestFullscreen();
+        this.text = "退出全屏";
+      } else {
+        document.exitFullscreen();
+        this.text = "全屏";
+      }
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  margin: 0;
+  padding: 0;
+}
+#app:fullscreen {
+  background-color: yellow;
+}
+html {
+  box-sizing: border-box
+}
+*, *::before, *::after {
+  box-sizing: inherit
 }
 </style>
+
+

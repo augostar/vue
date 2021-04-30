@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Lucky  from '../views/Lucky.vue'
 
 Vue.use(VueRouter)
 
@@ -13,6 +14,7 @@ const routes = [
     },
     title: '首页',
     component: Home,
+
   //   children: [
   //     {
   //       path: 'about',
@@ -56,6 +58,14 @@ const routes = [
   //     title: '登录'
   //   },
   //   component: () => import('../views/Login')
+  },
+  {
+    path: '/lucky',
+    name: 'lucky',
+    meta: {
+      title: '抽奖'
+    },
+    component: Lucky
   }
 
 ]
